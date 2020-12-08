@@ -21,7 +21,7 @@ socket.on("message", (message) => {
   //Update type of message based on username
   if (message.type !== messageTypes.LOGIN) {
     if (message.author === username) {
-      message.type = messageTypes.LEFT;
+      message.type = messageTypes.RIGHT;
     } else {
       message.type = messageTypes.LEFT;
     }
@@ -42,12 +42,10 @@ createMessageHTML = (message) => {
   }
   return `
 	<div class="message ${
-    message.type === messageTypes.RIGHT ? "message-left" : "message-right"
+    message.type === messageTypes.RIGHT ? "message-right" : "message-left"
   }">
 		<div class="message-details flex">
-			<p class="flex-grow-1 message-author">${
-        message.type === messageTypes.LEFT ? message.author : ""
-      }</p>
+			<p class="flex-grow-1 message-author">${message.author}</p>
 			<p class="message-date">${message.date}</p>
 		</div>
 		<p class="message-content">${message.content}</p>
@@ -75,8 +73,8 @@ sendBtn.addEventListener("click", (e) => {
   const dateString = `${day}/${month}/${year}`;
 
   const message = {
-    author: dateString,
-    date: username,
+    author: username,
+    date: dateString,
     content: messageInput.value,
   };
   sendMessage(message);
@@ -85,7 +83,6 @@ sendBtn.addEventListener("click", (e) => {
 });
 
 function addUsername(e) {
-  debugger;
   e.preventDefault();
   if (!usernameInput.value) {
     return console.log("Must supply a username");
