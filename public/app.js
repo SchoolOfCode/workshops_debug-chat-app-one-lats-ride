@@ -59,7 +59,7 @@ displayMessages = () => {
   const messagesHTML = messages
     .map((message) => createMessageHTML(message))
     .join("");
-  messagesList.innerHTML = messagesHTML[messagesHTML.length - 1];
+  messagesList.innerHTML = messagesHTML;
 };
 
 sendBtn.addEventListener("click", (e) => {
@@ -85,13 +85,14 @@ sendBtn.addEventListener("click", (e) => {
 });
 
 function addUsername(e) {
+  debugger;
   e.preventDefault();
   if (!usernameInput.value) {
     return console.log("Must supply a username");
   }
 
   //set the username and create logged in message
-  username = usernameInput.text;
+  username = usernameInput.value;
   sendMessage({ author: username, type: messageTypes.LOGIN });
 
   //show chat window and hide login
